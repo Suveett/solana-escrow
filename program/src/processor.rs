@@ -211,6 +211,10 @@ impl Processor {
             .ok_or(EscrowError::AmountOverflow)?;
         **escrow_account.try_borrow_mut_lamports()? = 0;
         *escrow_account.try_borrow_mut_data()? = &mut [];
+        // I could also use the below and should work fine: 
+        // **initializers_main_account.try_borrow_mut_lamports()? += **escrow_account.lamports.borrow();
+        // **escrow_account.try_borrow_mut_lamports()? = 0;
+        // *escrow_account.try_borrow_mut_data()? = &mut [];
 
         Ok(())
     }
